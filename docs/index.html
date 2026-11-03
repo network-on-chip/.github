@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoC Paper Map — Curated Network-on-Chip Literature</title>
+  <meta name="description" content="Search, filter, and explore 540+ curated research papers on Network-on-Chip (NoC), 2D/3D architectures, chiplet interconnects, optical/wireless fabrics, and router microarchitectures.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b13;
+      --bg-surface: #0e1524;
+      --bg-surface-elevated: #162035;
+      --border: #22324e;
+      --border-subtle: #172338;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.16);
+      --accent-hover: #0ea5e9;
+      --badge-bg: #162540;
+      --badge-text: #7dd3fc;
+      --card-highlight: rgba(56, 189, 248, 0.04);
+      --table-stripe: rgba(15, 23, 42, 0.45);
+      --row-hover: rgba(56, 189, 248, 0.08);
+      --radius: 10px;
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f1f5f9;
+      --border: #cbd5e1;
+      --border-subtle: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.12);
+      --accent-hover: #0369a1;
+      --badge-bg: #e0f2fe;
+      --badge-text: #0369a1;
+      --card-highlight: rgba(2, 132, 199, 0.03);
+      --table-stripe: #f8fafc;
+      --row-hover: rgba(2, 132, 199, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background mesh glow */
+    .ambient-glow {
+      position: fixed;
+      top: -220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1100px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(99, 102, 241, 0.08) 45%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(14, 21, 36, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .header-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.15rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35);
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .header-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    .header-link:hover {
+      color: var(--accent);
+      background: var(--bg-surface-elevated);
+    }
+
+    .theme-toggle {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+      flex: 1;
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    /* KPI Highlights */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .kpi-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .kpi-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .kpi-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .search-wrapper {
+      flex: 1 1 340px;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.7rem 2.4rem 0.7rem 2.5rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .search-shortcut {
+      position: absolute;
+      right: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--border);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .filter-select {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .stats-badge {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      white-space: nowrap;
+      padding: 0.4rem 0.85rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+    }
+
+    .stats-count {
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Category Pill Bar */
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding-top: 0.25rem;
+    }
+
+    .pill-btn {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .pill-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .pill-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+
+    [data-theme="light"] .pill-btn.active {
+      color: #fff;
+    }
+
+    /* Table Container */
+    .table-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th {
+      background: var(--bg-surface-elevated);
+      padding: 0.9rem 1.15rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    th.sortable {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    th.sortable:hover {
+      color: var(--accent);
+    }
+
+    .sort-indicator {
+      display: inline-block;
+      margin-left: 0.35rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    th.sortable.active .sort-indicator {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    td {
+      padding: 1rem 1.15rem;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+
+    tbody tr {
+      transition: var(--transition);
+    }
+
+    tbody tr:hover {
+      background: var(--row-hover);
+    }
+
+    .paper-title {
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 0.35rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .paper-title:hover {
+      color: var(--accent);
+    }
+
+    .paper-innovation {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .paper-authors {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+      max-width: 260px;
+    }
+
+    .paper-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .venue-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .domain-tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      margin: 0.15rem 0.2rem 0.15rem 0;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      white-space: nowrap;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .action-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .action-btn-primary {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    .action-btn-primary:hover {
+      background: var(--accent-hover);
+      color: #000;
+    }
+
+    /* Modal / Drawer */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.35;
+      padding-right: 2.5rem;
+    }
+
+    .modal-meta {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .modal-section-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .modal-abstract {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .bibtex-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      color: var(--text-muted);
+      max-height: 180px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: auto;
+      background: var(--bg-surface);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 860px) {
+      .header-container { padding: 1rem; }
+      main { padding: 1rem 1rem 3rem; }
+      .controls-row { flex-direction: column; align-items: stretch; }
+      .filter-select, .stats-badge { width: 100%; }
+      .stats-badge { text-align: center; }
+      .paper-authors { max-width: 180px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <header>
+    <div class="header-container">
+      <a href="https://github.com/network-on-chip" class="brand">
+        <div class="brand-icon">⊞</div>
+        <div>
+          <div class="brand-title">Network-on-Chip (NoC) Community</div>
+          <div class="brand-sub">Curated On-Chip Interconnect & Chiplet Literature Map</div>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="https://github.com/network-on-chip/noc-lab" class="header-link" target="_blank" rel="noopener noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          Parent Monorepo (noc-lab)
+        </a>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label">Light</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Network-on-Chip (NoC) Research Map</h1>
+      <p>
+        An interactive, searchable exploration matrix covering 540+ curated research papers across 2D/3D NoC, chiplet packaging networks, router microarchitectures, photonic/wireless interconnects, and resilient routing schemes.
+      </p>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-num" id="kpi-total">541</div>
+          <div class="kpi-label">Curated Papers</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">11</div>
+          <div class="kpi-label">Research Domains</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">5</div>
+          <div class="kpi-label">Top IEEE Venues</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">1995–2026</div>
+          <div class="kpi-label">Temporal Span</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls-panel">
+      <div class="controls-row">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search titles, authors, keywords, venues, abstracts, DOIs (press / to focus)..."
+            autocomplete="off"
+          />
+          <span class="search-shortcut">/</span>
+        </div>
+
+        <select id="domain-select" class="filter-select">
+          <option value="">All Research Domains</option>
+        </select>
+
+        <select id="venue-select" class="filter-select">
+          <option value="">All Venues</option>
+          <option value="TCAD">IEEE TCAD</option>
+          <option value="TVLSI">IEEE TVLSI</option>
+          <option value="JSSC">IEEE JSSC</option>
+          <option value="TCAS-I">IEEE TCAS-I</option>
+          <option value="TCAS-II">IEEE TCAS-II</option>
+        </select>
+
+        <div id="stats-badge" class="stats-badge" aria-live="polite">
+          Showing <span id="visible-count" class="stats-count">541</span> of <span id="total-count">541</span> papers
+        </div>
+      </div>
+
+      <div class="pills-container" id="pills-bar">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <div class="table-card">
+      <div class="table-wrapper">
+        <table id="papers-table">
+          <thead>
+            <tr>
+              <th class="sortable col-title" data-sort="title">
+                Paper & Core Contribution <span class="sort-indicator">↕</span>
+              </th>
+              <th class="sortable col-authors" data-sort="authors">
+                Authors <span class="sort-indicator">↕</span>
+              </th>
+              <th class="sortable col-year active" data-sort="year" aria-sort="descending">
+                Year <span class="sort-indicator">↓</span>
+              </th>
+              <th class="sortable col-venue" data-sort="venue_short">
+                Venue <span class="sort-indicator">↕</span>
+              </th>
+              <th class="col-domain">Research Domain</th>
+              <th class="col-actions">Access & Details</th>
+            </tr>
+          </thead>
+          <tbody id="papers-tbody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <div class="empty-state-icon">🔎</div>
+        <h3>No matching papers found</h3>
+        <p>Try refining your search terms or selecting "All Research Domains".</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="paper-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <button id="modal-close-btn" class="modal-close" aria-label="Close modal">✕</button>
+      <div class="modal-meta" id="modal-meta"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      
+      <div>
+        <div class="modal-section-title">Core Contribution / Innovation</div>
+        <p class="modal-abstract" id="modal-innovation" style="font-weight: 500; color: var(--text);"></p>
+      </div>
+
+      <div>
+        <div class="modal-section-title">Abstract</div>
+        <p class="modal-abstract" id="modal-abstract"></p>
+      </div>
+
+      <div>
+        <div class="modal-section-title">BibTeX Citation</div>
+        <div class="bibtex-box" id="modal-bibtex"></div>
+      </div>
+
+      <div class="modal-actions">
+        <a id="modal-doi-link" href="#" target="_blank" rel="noopener noreferrer" class="action-btn action-btn-primary">
+          Open Publisher Link (DOI) ↗
+        </a>
+        <button id="modal-copy-bib-btn" class="action-btn">
+          📋 Copy BibTeX
+        </button>
+        <a id="modal-repo-link" href="#" target="_blank" rel="noopener noreferrer" class="action-btn">
+          View in noc-lab ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div style="max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; align-items: center;">
+      <div>
+        <strong>Network-on-Chip (NoC) Community</strong> · Synchronized from <a href="https://github.com/network-on-chip/noc-lab" target="_blank" rel="noopener noreferrer">network-on-chip/noc-lab</a>.
+      </div>
+      <div>
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const DOMAIN_LABELS = {
+        "fault-tolerant-noc": "Fault-Tolerant & Resilient NoC",
+        "chiplet-interconnect": "Chiplet & Multi-Chiplet",
+        "routing-algorithm": "Routing & Deadlock Avoidance",
+        "low-power-noc": "Low-Power & Energy-Efficient",
+        "optical-noc": "Optical / Photonic NoC",
+        "wireless-noc": "Wireless / RF NoC",
+        "3d-noc": "3D NoC & TSV",
+        "topology-optimization": "Topology Optimization",
+        "router-microarchitecture": "Router Microarchitecture",
+        "noc-architecture": "NoC Architectures & Manycore",
+        "noc-security": "NoC Security & Protection"
+      };
+
+      let papersData = [];
+      let activeDomain = "";
+      let activeVenue = "";
+      let sortKey = "year";
+      let sortDir = -1; // -1 = desc, 1 = asc
+      let currentModalPaper = null;
+
+      const searchInput = document.getElementById("search-input");
+      const domainSelect = document.getElementById("domain-select");
+      const venueSelect = document.getElementById("venue-select");
+      const visibleCountEl = document.getElementById("visible-count");
+      const totalCountEl = document.getElementById("total-count");
+      const kpiTotalEl = document.getElementById("kpi-total");
+      const pillsBar = document.getElementById("pills-bar");
+      const tbody = document.getElementById("papers-tbody");
+      const emptyState = document.getElementById("empty-state");
+      const modal = document.getElementById("paper-modal");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
+      const copyBibBtn = document.getElementById("modal-copy-bib-btn");
+
+      // Theme toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      const themeLabel = document.getElementById("theme-label");
+
+      function initTheme() {
+        const saved = localStorage.getItem("noc-theme") || "dark";
+        if (saved === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+          themeIcon.textContent = "🌙";
+          themeLabel.textContent = "Dark";
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+          themeIcon.textContent = "☀️";
+          themeLabel.textContent = "Light";
+        }
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const isLight = document.documentElement.getAttribute("data-theme") === "light";
+        if (isLight) {
+          document.documentElement.removeAttribute("data-theme");
+          localStorage.setItem("noc-theme", "dark");
+          themeIcon.textContent = "☀️";
+          themeLabel.textContent = "Light";
+        } else {
+          document.documentElement.setAttribute("data-theme", "light");
+          localStorage.setItem("noc-theme", "light");
+          themeIcon.textContent = "🌙";
+          themeLabel.textContent = "Dark";
+        }
+      });
+
+      initTheme();
+
+      // Keyboard shortcut "/" to focus search
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        } else if (e.key === "Escape" && modal.style.display === "flex") {
+          closeModal();
+        }
+      });
+
+      // Fetch catalog JSON
+      fetch("papers.json")
+        .then(res => {
+          if (!res.ok) throw new Error("Could not load papers.json");
+          return res.json();
+        })
+        .then(data => {
+          papersData = data;
+          totalCountEl.textContent = data.length;
+          kpiTotalEl.textContent = data.length;
+          buildFilters(data);
+          render();
+        })
+        .catch(err => {
+          console.error(err);
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 2rem; color: #ef4444;">Failed to load papers catalog database: ${err.message}</td></tr>`;
+        });
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function buildFilters(data) {
+        const counts = {};
+        data.forEach(p => {
+          (p.categories || []).forEach(c => {
+            counts[c] = (counts[c] || 0) + 1;
+          });
+        });
+
+        const domains = Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+
+        // Populate Select
+        domains.forEach(d => {
+          const opt = document.createElement("option");
+          opt.value = d;
+          opt.textContent = `${DOMAIN_LABELS[d] || d} (${counts[d]})`;
+          domainSelect.appendChild(opt);
+        });
+
+        // Populate Pills
+        const allBtn = document.createElement("button");
+        allBtn.className = "pill-btn active";
+        allBtn.dataset.domain = "";
+        allBtn.textContent = `All (${data.length})`;
+        pillsBar.appendChild(allBtn);
+
+        domains.forEach(d => {
+          const btn = document.createElement("button");
+          btn.className = "pill-btn";
+          btn.dataset.domain = d;
+          btn.textContent = `${DOMAIN_LABELS[d] || d} (${counts[d]})`;
+          pillsBar.appendChild(btn);
+        });
+
+        pillsBar.addEventListener("click", (e) => {
+          const btn = e.target.closest(".pill-btn");
+          if (!btn) return;
+          setDomainFilter(btn.dataset.domain);
+        });
+
+        domainSelect.addEventListener("change", () => {
+          setDomainFilter(domainSelect.value);
+        });
+
+        venueSelect.addEventListener("change", () => {
+          activeVenue = venueSelect.value;
+          render();
+        });
+
+        searchInput.addEventListener("input", () => {
+          render();
+        });
+      }
+
+      function setDomainFilter(val) {
+        activeDomain = val;
+        domainSelect.value = val;
+        pillsBar.querySelectorAll(".pill-btn").forEach(b => {
+          b.classList.toggle("active", b.dataset.domain === val);
+        });
+        render();
+      }
+
+      // Column Sorting
+      document.querySelectorAll("th.sortable").forEach(th => {
+        th.addEventListener("click", () => {
+          const key = th.dataset.sort;
+          if (sortKey === key) {
+            sortDir = -sortDir;
+          } else {
+            sortKey = key;
+            sortDir = key === "year" ? -1 : 1;
+          }
+
+          document.querySelectorAll("th.sortable").forEach(t => {
+            t.classList.remove("active");
+            t.removeAttribute("aria-sort");
+            t.querySelector(".sort-indicator").textContent = "↕";
+          });
+
+          th.classList.add("active");
+          th.setAttribute("aria-sort", sortDir === -1 ? "descending" : "ascending");
+          th.querySelector(".sort-indicator").textContent = sortDir === -1 ? "↓" : "↑";
+
+          render();
+        });
+      });
+
+      function sortPapers(items) {
+        return items.sort((a, b) => {
+          let va = a[sortKey] || "";
+          let vb = b[sortKey] || "";
+
+          if (sortKey === "year") {
+            const ya = parseInt(va, 10) || 0;
+            const yb = parseInt(vb, 10) || 0;
+            return (ya - yb) * sortDir;
+          }
+
+          return String(va).localeCompare(String(vb), undefined, { numeric: true }) * sortDir;
+        });
+      }
+
+      function render() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        const filtered = papersData.filter(p => {
+          if (activeDomain && !(p.categories || []).includes(activeDomain)) {
+            return false;
+          }
+          if (activeVenue && p.venue_short !== activeVenue) {
+            return false;
+          }
+          if (!query) return true;
+
+          const haystack = [
+            p.title,
+            p.authors,
+            p.venue_short,
+            p.venue,
+            p.year,
+            p.innovation,
+            p.abstract,
+            p.doi,
+            (p.categories || []).join(" ")
+          ].join(" ").toLowerCase();
+
+          return haystack.includes(query);
+        });
+
+        const sorted = sortPapers(filtered);
+
+        tbody.innerHTML = "";
+        visibleCountEl.textContent = sorted.length;
+        emptyState.style.display = sorted.length === 0 ? "block" : "none";
+
+        sorted.forEach(p => {
+          const tr = document.createElement("tr");
+
+          const domainBadges = (p.categories || []).map(c => 
+            `<span class="domain-tag">${escapeHtml(DOMAIN_LABELS[c] || c)}</span>`
+          ).join("");
+
+          tr.innerHTML = `
+            <td>
+              <div class="paper-title" data-slug="${escapeHtml(p.slug)}">${escapeHtml(p.title)}</div>
+              <div class="paper-innovation">${escapeHtml(p.innovation)}</div>
+            </td>
+            <td>
+              <div class="paper-authors">${escapeHtml(p.authors)}</div>
+            </td>
+            <td>
+              <span class="paper-year">${escapeHtml(p.year)}</span>
+            </td>
+            <td>
+              <span class="venue-badge" title="${escapeHtml(p.venue)}">${escapeHtml(p.venue_short || p.venue)}</span>
+            </td>
+            <td>
+              <div>${domainBadges}</div>
+            </td>
+            <td>
+              <div style="display: flex; gap: 0.35rem; flex-wrap: wrap;">
+                <button class="action-btn view-details-btn" data-slug="${escapeHtml(p.slug)}">
+                  🔍 Details
+                </button>
+                ${p.doi ? `<a href="https://doi.org/${escapeHtml(p.doi)}" target="_blank" rel="noopener noreferrer" class="action-btn" title="Open Publisher DOI">DOI ↗</a>` : ''}
+              </div>
+            </td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+
+        // Bind clicks for modal
+        tbody.querySelectorAll(".paper-title, .view-details-btn").forEach(el => {
+          el.addEventListener("click", () => {
+            const slug = el.dataset.slug;
+            const paper = papersData.find(p => p.slug === slug);
+            if (paper) openModal(paper);
+          });
+        });
+      }
+
+      function openModal(paper) {
+        currentModalPaper = paper;
+        document.getElementById("modal-title").textContent = paper.title;
+        document.getElementById("modal-meta").innerHTML = `
+          <span>👤 <strong>${escapeHtml(paper.authors)}</strong></span>
+          <span>📅 <strong>${escapeHtml(paper.year)}</strong></span>
+          <span>🏛️ <strong>${escapeHtml(paper.venue)}</strong></span>
+        `;
+        document.getElementById("modal-innovation").textContent = paper.innovation || "N/A";
+        document.getElementById("modal-abstract").textContent = paper.abstract || "No abstract available in catalog metadata.";
+        
+        const bibtexBox = document.getElementById("modal-bibtex");
+        bibtexBox.textContent = paper.bibtex || generateFallbackBibtex(paper);
+
+        const doiLink = document.getElementById("modal-doi-link");
+        if (paper.doi) {
+          doiLink.href = `https://doi.org/${paper.doi}`;
+          doiLink.style.display = "inline-flex";
+        } else {
+          doiLink.style.display = "none";
+        }
+
+        document.getElementById("modal-repo-link").href = paper.repo_url || `https://github.com/network-on-chip/noc-lab/tree/main/papers/${paper.slug}`;
+
+        copyBibBtn.textContent = "📋 Copy BibTeX";
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        modal.style.display = "none";
+        currentModalPaper = null;
+      }
+
+      modalCloseBtn.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      copyBibBtn.addEventListener("click", () => {
+        if (!currentModalPaper) return;
+        const bib = currentModalPaper.bibtex || generateFallbackBibtex(currentModalPaper);
+        navigator.clipboard.writeText(bib).then(() => {
+          copyBibBtn.textContent = "✓ Copied to Clipboard!";
+          setTimeout(() => {
+            copyBibBtn.textContent = "📋 Copy BibTeX";
+          }, 2000);
+        });
+      });
+
+      function generateFallbackBibtex(p) {
+        const authorFirst = (p.authors.split(";")[0] || "Author").trim().split(" ").pop().toLowerCase();
+        const key = `${authorFirst}${p.year || "2026"}_${(p.slug || "noc").replace(/[^a-z0-9]/g, "")}`;
+        return `@article{${key},
+  title = {${p.title}},
+  author = {${p.authors}},
+  journal = {${p.venue}},
+  year = {${p.year}},
+  doi = {${p.doi || ""}}
+}`;
+      }
+
+    })();
+  </script>
+</body>
+</html>
