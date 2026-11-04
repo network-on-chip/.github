@@ -5,6 +5,7 @@ Open **Network-on-Chip (NoC)**, **Chiplet Interconnects**, and **Advanced On-Chi
 [![GitHub Pages](https://img.shields.io/badge/Pages-NoC%20Paper%20Map-181717?logo=github)](https://network-on-chip.github.io/.github/)
 [![Parent Monorepo](https://img.shields.io/badge/Monorepo-noc--lab-blue?logo=github)](https://github.com/network-on-chip/noc-lab)
 [![Corpus: 541%2B Papers](https://img.shields.io/badge/Corpus-541%2B%20Curated%20Papers-2563eb)](https://github.com/network-on-chip/noc-lab)
+[![Total Stars](https://img.shields.io/github/stars/network-on-chip?style=flat&logo=github&label=total%20stars)](https://github.com/network-on-chip)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-green?logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by/4.0/)
 [![Org Followers](https://img.shields.io/github/followers/network-on-chip?label=followers&logo=github)](https://github.com/network-on-chip)
 

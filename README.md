@@ -4,6 +4,8 @@
 [![GitHub Pages](https://img.shields.io/badge/Pages-NoC%20Paper%20Map-181717?logo=github)](https://network-on-chip.github.io/.github/)
 [![Parent Monorepo](https://img.shields.io/badge/Monorepo-noc--lab-blue?logo=github)](https://github.com/network-on-chip/noc-lab)
 [![Corpus: 541+ Papers](https://img.shields.io/badge/Corpus-541%2B%20Papers-2563eb)](https://github.com/network-on-chip/noc-lab)
+[![Total Stars](https://img.shields.io/github/stars/network-on-chip?style=flat&logo=github&label=total%20stars)](https://github.com/network-on-chip)
+[![Org Followers](https://img.shields.io/github/followers/network-on-chip?label=followers&logo=github)](https://github.com/network-on-chip)
 
 Special GitHub organization repository for **[network-on-chip](https://github.com/network-on-chip)**:
 - [`profile/README.md`](profile/README.md) renders as the organization's public landing page at `https://github.com/network-on-chip`.
