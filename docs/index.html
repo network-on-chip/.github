@@ -1202,13 +1202,14 @@
       });
 
       function generateFallbackBibtex(p) {
-        const authorFirst = (p.authors.split(";")[0] || "Author").trim().split(" ").pop().toLowerCase();
+        const authorsList = p.authors || "IEEE";
+        const authorFirst = (authorsList.split(";")[0] || "Author").trim().split(" ").pop().toLowerCase() || "author";
         const key = `${authorFirst}${p.year || "2026"}_${(p.slug || "noc").replace(/[^a-z0-9]/g, "")}`;
         return `@article{${key},
   title = {${p.title}},
-  author = {${p.authors}},
-  journal = {${p.venue}},
-  year = {${p.year}},
+  author = {${authorsList}},
+  journal = {${p.venue || "IEEE"}},
+  year = {${p.year || "2026"}},
   doi = {${p.doi || ""}}
 }`;
       }
