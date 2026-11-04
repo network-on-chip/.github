@@ -4,8 +4,7 @@ Open **Network-on-Chip (NoC)**, **Chiplet Interconnects**, and **Advanced On-Chi
 
 [![Live Learning Hub](https://img.shields.io/badge/Learning%20Hub-NoC%20Interactive%20Curriculum-0f766e?logo=bookstack&logoColor=white)](https://network-on-chip.github.io/learning/)
 [![GitHub Pages](https://img.shields.io/badge/Pages-NoC%20Paper%20Map-181717?logo=github)](https://network-on-chip.github.io/.github/)
-[![Parent Monorepo](https://img.shields.io/badge/Monorepo-noc--lab-blue?logo=github)](https://github.com/network-on-chip/noc-lab)
-[![Corpus: 541%2B Papers](https://img.shields.io/badge/Corpus-541%2B%20Curated%20Papers-2563eb)](https://github.com/network-on-chip/noc-lab)
+[![Corpus: 541%2B Papers](https://img.shields.io/badge/Corpus-541%2B%20Curated%20Papers-2563eb)](https://network-on-chip.github.io/.github/)
 [![Total Stars](https://img.shields.io/github/stars/network-on-chip?style=flat&logo=github&label=total%20stars)](https://github.com/network-on-chip)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-green?logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by/4.0/)
 [![Org Followers](https://img.shields.io/github/followers/network-on-chip?label=followers&logo=github)](https://github.com/network-on-chip)
@@ -16,7 +15,6 @@ Open **Network-on-Chip (NoC)**, **Chiplet Interconnects**, and **Advanced On-Chi
 
 - **[Interactive NoC Learning Hub](https://network-on-chip.github.io/learning/)** — An open-source, interactive curriculum and cycle-accurate 2D mesh simulator across 7 progressive tracks.
 - **[Interactive NoC Paper Map & Research Compass](https://network-on-chip.github.io/.github/)** — Client-side instant search, domain filtering, venue breakdowns, and publisher DOI access across **541+ curated papers**.
-- **[noc-lab (Parent Monorepo)](https://github.com/network-on-chip/noc-lab)** — Structured paper digests, full extracted figures/tables, and reproduction workflows.
 
 ---
 
@@ -54,13 +52,10 @@ Curated from leading IEEE journals covering computer-aided design, VLSI systems,
 
 ---
 
-## 🏛️ Ecosystem & Repository Structure
+## 🏛️ Ecosystem & Repositories
 
-- **[`network-on-chip/learning`](https://github.com/network-on-chip/learning)** — The interactive learning portal and curriculum deployed to `https://network-on-chip.github.io/learning/`.
-- **[`network-on-chip/.github`](https://github.com/network-on-chip/.github)** — Organization landing page and interactive web application deployed to GitHub Pages.
-- **[`network-on-chip/noc-lab`](https://github.com/network-on-chip/noc-lab)** — The research laboratory monorepo containing paper extractions, figure digitization, analysis digests, and scripts.
-
-Synchronized automatically from `noc-lab` via `python scripts/export_papers_catalog.py`.
+- **[`network-on-chip/learning`](https://github.com/network-on-chip/learning)** — The interactive learning portal and curriculum deployed to [network-on-chip.github.io/learning](https://network-on-chip.github.io/learning/).
+- **[`network-on-chip/.github`](https://github.com/network-on-chip/.github)** — Organization landing page and interactive web application deployed to [network-on-chip.github.io/.github](https://network-on-chip.github.io/.github/).
 
 ---
 

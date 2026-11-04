@@ -2,8 +2,7 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-green?logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by/4.0/)
 [![GitHub Pages](https://img.shields.io/badge/Pages-NoC%20Paper%20Map-181717?logo=github)](https://network-on-chip.github.io/.github/)
-[![Parent Monorepo](https://img.shields.io/badge/Monorepo-noc--lab-blue?logo=github)](https://github.com/network-on-chip/noc-lab)
-[![Corpus: 541+ Papers](https://img.shields.io/badge/Corpus-541%2B%20Papers-2563eb)](https://github.com/network-on-chip/noc-lab)
+[![Corpus: 541+ Papers](https://img.shields.io/badge/Corpus-541%2B%20Papers-2563eb)](https://network-on-chip.github.io/.github/)
 [![Total Stars](https://img.shields.io/github/stars/network-on-chip?style=flat&logo=github&label=total%20stars)](https://github.com/network-on-chip)
 [![Org Followers](https://img.shields.io/github/followers/network-on-chip?label=followers&logo=github)](https://github.com/network-on-chip)
 
@@ -15,7 +14,7 @@ Special GitHub organization repository for **[network-on-chip](https://github.co
 
 - **Organization Homepage**: https://github.com/network-on-chip
 - **Interactive Paper Map**: https://network-on-chip.github.io/.github/
-- **Parent Monorepo**: https://github.com/network-on-chip/noc-lab
+- **Interactive Learning Hub**: https://network-on-chip.github.io/learning/
 - **License**: [CC BY 4.0](LICENSE)
 
 ## Project Layout
@@ -42,16 +41,6 @@ Special GitHub organization repository for **[network-on-chip](https://github.co
 - **Domain Filter Pills**: Filter across 11 NoC research domains with live counter badges.
 - **Abstract & BibTeX Modal**: 1-click BibTeX copy with clipboard confirmation and direct DOI resolver access.
 - **Dark/Light Theme**: Sleek ambient dark theme with high-contrast light theme switch, persisted in `localStorage`.
-
-## Synchronization
-
-This repository is maintained and synchronized from the monorepo [network-on-chip/noc-lab](https://github.com/network-on-chip/noc-lab):
-
-```bash
-# In noc-lab
-python scripts/export_papers_catalog.py
-bash share/sync_github_org.sh
-```
 
 ## License
 
