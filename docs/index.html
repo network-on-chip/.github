@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NoC Paper Map — Curated Network-on-Chip Literature</title>
   <meta name="description" content="Search, filter, and explore 540+ curated research papers on Network-on-Chip (NoC), 2D/3D architectures, chiplet interconnects, optical/wireless fabrics, and router microarchitectures.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #070b13;
@@ -1110,6 +1107,7 @@
         visibleCountEl.textContent = sorted.length;
         emptyState.style.display = sorted.length === 0 ? "block" : "none";
 
+        const fragment = document.createDocumentFragment();
         sorted.forEach(p => {
           const tr = document.createElement("tr");
 
@@ -1144,18 +1142,19 @@
             </td>
           `;
 
-          tbody.appendChild(tr);
+          fragment.appendChild(tr);
         });
-
-        // Bind clicks for modal
-        tbody.querySelectorAll(".paper-title, .view-details-btn").forEach(el => {
-          el.addEventListener("click", () => {
-            const slug = el.dataset.slug;
-            const paper = papersData.find(p => p.slug === slug);
-            if (paper) openModal(paper);
-          });
-        });
+        tbody.appendChild(fragment);
       }
+
+      // Event delegation for opening paper modal
+      tbody.addEventListener("click", (e) => {
+        const target = e.target.closest(".paper-title, .view-details-btn");
+        if (!target) return;
+        const slug = target.dataset.slug;
+        const paper = papersData.find(p => p.slug === slug);
+        if (paper) openModal(paper);
+      });
 
       function openModal(paper) {
         currentModalPaper = paper;
