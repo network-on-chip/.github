@@ -13,6 +13,7 @@ Special GitHub organization repository for **[network-on-chip](https://github.co
 ## Quick Links
 
 - **Organization Homepage**: https://github.com/network-on-chip
+- **Textbook & Co-Design Repository**: https://github.com/network-on-chip/book
 - **Interactive Paper Map**: https://network-on-chip.github.io/.github/
 - **Interactive Learning Hub**: https://network-on-chip.github.io/learning/
 - **License**: [CC BY 4.0](LICENSE)

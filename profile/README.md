@@ -13,7 +13,8 @@ Open **Network-on-Chip (NoC)**, **Chiplet Interconnects**, and **Advanced On-Chi
 
 ## 🧭 Start Here
 
-- **[Interactive NoC Learning Hub](https://network-on-chip.github.io/learning/)** — An open-source, interactive curriculum and cycle-accurate 2D mesh simulator across 7 progressive tracks.
+- **[Network-on-Chip Textbook](https://github.com/network-on-chip/book)** — Authoritative 12-chapter open-access textbook synthesizing router microarchitecture, deadlock theory, 3D/chiplet interconnects, and domain-specific fabrics with executable RTL & Python models.
+- **[Interactive NoC Learning Hub](https://network-on-chip.github.io/learning/)** — An open-source, interactive curriculum and cycle-accurate 2D mesh simulator across progressive tracks.
 - **[Interactive NoC Paper Map & Research Compass](https://network-on-chip.github.io/.github/)** — Client-side instant search, domain filtering, venue breakdowns, and publisher DOI access across **541+ curated papers**.
 
 ---
@@ -54,6 +55,7 @@ Curated from leading IEEE journals covering computer-aided design, VLSI systems,
 
 ## 🏛️ Ecosystem & Repositories
 
+- **[`network-on-chip/book`](https://github.com/network-on-chip/book)** — Authoritative, open-access textbook and co-design repository covering on-chip communication foundations to emerging frontiers.
 - **[`network-on-chip/learning`](https://github.com/network-on-chip/learning)** — The interactive learning portal and curriculum deployed to [network-on-chip.github.io/learning](https://network-on-chip.github.io/learning/).
 - **[`network-on-chip/.github`](https://github.com/network-on-chip/.github)** — Organization landing page and interactive web application deployed to [network-on-chip.github.io/.github](https://network-on-chip.github.io/.github/).
 
