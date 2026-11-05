@@ -936,11 +936,14 @@
 
       // Keyboard shortcut "/" to focus search
       window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.style.display === "flex") {
+          closeModal();
+          return;
+        }
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
         if (e.key === "/" && document.activeElement !== searchInput) {
           e.preventDefault();
           searchInput.focus();
-        } else if (e.key === "Escape" && modal.style.display === "flex") {
-          closeModal();
         }
       });
 
